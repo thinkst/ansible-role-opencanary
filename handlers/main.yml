@@ -1,0 +1,9 @@
+- name: start opencanaryd
+  systemd:
+    name: opencanaryd
+    state: restarted
+
+- name: stop opencanaryd
+  systemd:
+    name: opencanaryd
+    state: stopped

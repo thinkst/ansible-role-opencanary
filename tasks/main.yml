@@ -1,0 +1,6 @@
+---
+- include: dependencies.yml
+  tags: [ install ]
+
+- include: opencanary.yml
+  tags: [ install, update ]

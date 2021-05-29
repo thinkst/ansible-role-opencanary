@@ -1,0 +1,12 @@
+--- 
+- name: Install Debian dependencies
+  apt:
+    name: "{{ apt_packages }}"
+    state: latest
+  when: ansible_os_family == 'Debian'
+
+- name: Install Samaba 
+  apt:
+    name: samba
+    state: latest
+  when: smb_enabled == "true"

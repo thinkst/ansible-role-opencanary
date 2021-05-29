@@ -1,0 +1,59 @@
+--- 
+- name: Install opencanary
+  pip:
+    name: opencanary
+    virtualenv: "{{ opencanary_install_dir }}"
+    virtualenv_command: "/usr/bin/python3 -m venv"
+
+- name: Install optional python dependencies
+  pip:
+    name: scapy,pcapy,rdpy
+    virtualenv: "{{ opencanary_install_dir }}"
+    virtualenv_command: "/usr/bin/python3 -m venv"
+
+- name: Create /etc/opencanary
+  file:
+    path: /etc/opencanaryd
+    state: directory
+
+- name: Install opencanaryd.service
+  template:
+    src: opencanaryd_service.jn2
+    dest: /etc/systemd/system/opencanaryd.service
+    
+- name: Install opencanary config
+  template:
+    src: opencanary_conf.jn2
+    dest: /etc/opencanaryd/opencanary.conf
+  register: config
+
+- block:
+    - name: Create {{ samba_path }}
+      file:
+        path: "{{ samba_path }}"
+        state: directory
+        mode: "0777"
+
+    - name: Configure Samba 
+      template:
+        src: samba_conf.jn2
+        dest: /etc/samba/smb.conf
+
+    - name: Configure Samba Audit
+      template:
+        src: samba_audit.jn2
+        dest: /etc/rsyslog.d/smb_audit.conf
+  when: smb_enabled == "true"
+
+- name: Enable opencanaryd.service
+  systemd:
+    name: opencanaryd
+    enabled: yes
+    masked: no
+    daemon_reload: yes
+  notify: start opencanaryd
+
+- name: Restart opencanaryd
+  command: echo restart opencanaryd
+  notify: start opencanaryd
+  when: config.changed

@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: opencanary
+  author: theidiotyouyellat
+  description: Configures an OpenCanary honeypot
+  license: MIT
+  min_ansible_version: 2.7.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - stretch
+  galaxy_tags: 
+    - honeypot
+    - opencanary
+    - security
