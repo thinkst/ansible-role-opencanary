@@ -1,5 +1,5 @@
 To Do list
 ---
 
-* Add Meta data
+* Add Metadata
 * Add Tests
