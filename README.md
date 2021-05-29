@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installs OpenCanary and it's dependencies.
+Installs [Thinkst OpenCanary](https://github.com/thinkst/opencanary) and it's dependencies.
 
 
 Role Variables
