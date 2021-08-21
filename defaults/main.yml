@@ -20,7 +20,7 @@ httpproxy_skin: "ms-isa"
 logger_file_filename: "/var/log/opencanary.log"
 logger_syslog_port: 514
 smtp_port: 25
-smtp_subject: "OpenCanary Alert""
+smtp_subject: "OpenCanary Alert"
 portscan_enabled: "false"
 portscan_logfile: "/var/log/kern.log"
 portscan_synrate: "5"
