@@ -5,11 +5,11 @@
     virtualenv: "{{ opencanary_install_dir }}"
     virtualenv_command: "/usr/bin/python3 -m venv"
 
-- name: Install optional python dependencies
-  pip:
-    name: scapy,pcapy
-    virtualenv: "{{ opencanary_install_dir }}"
-    virtualenv_command: "/usr/bin/python3 -m venv"
+#- name: Install optional python dependencies
+#  pip:
+#    name: scapy,pcapy
+#    virtualenv: "{{ opencanary_install_dir }}"
+#    virtualenv_command: "/usr/bin/python3 -m venv"
 
 - name: Create /etc/opencanary
   file:
