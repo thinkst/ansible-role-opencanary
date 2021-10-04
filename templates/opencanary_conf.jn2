@@ -81,6 +81,7 @@
         }
     },
     "portscan.enabled": {{ portscan_enabled }},
+    "portscan.ignore_localhost": {{ portscan_ignore_localhost }},
     "portscan.logfile":"/var/log/kern.log",
     "portscan.synrate": {{ portscan_synrate }},
     "portscan.nmaposrate": {{ portscan_nmaposrate }},

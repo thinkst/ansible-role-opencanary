@@ -1,6 +1,7 @@
 ---
 
 opencanary_install_dir: "/opt/opencanary"
+opencanary_version: ""
 
 # opencanary conf file defaults
 device_node_id: "opencanary-{{ ansible_hostname }}"
@@ -22,6 +23,7 @@ logger_syslog_port: 514
 smtp_port: 25
 smtp_subject: "OpenCanary Alert"
 portscan_enabled: "false"
+portscan_ignore_localhost: "false"
 portscan_logfile: "/var/log/kern.log"
 portscan_synrate: "5"
 portscan_nmaposrate: "5"
