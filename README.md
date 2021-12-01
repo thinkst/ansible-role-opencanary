@@ -9,12 +9,13 @@ Role Variables
 
 | **Name**                          | **Default Value**                | **Description**
 | --------------------------------- | -------------------------------- | ------------------------
-| `opencanary_install_dir`          | /opt/opencanary                  | Install directory for opencanary virtual environment
+| `opencanary_install_dir`          | /opt/opencanary                  | Install directory for opencanary virtual environment.
+| `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
-| `ip_ignorelist`                   | N/A                              | CIDR space delimited list of IP addresses
-| `git_enabled`                     | false                            | Enable git canary
+| `ip_ignorelist`                   | N/A                              | CIDR space delimited list of IP addresses.
+| `git_enabled`                     | false                            | Enable git canary.
 | `git_port`                        | 9418                             | Port for git canary.
-| `ftp_enabled`                     | false                            | Enable ftp canary
+| `ftp_enabled`                     | false                            | Enable ftp canary.
 | `ftp_port`                        | 21                               | Port for ftp canary.
 | `ftp_banner`                      | FTP Server Ready                 | Banner for ftp canary.
 | `http_banner`                     | Apache/2.2.22 (Ubuntu)           | Banner for http canary.
@@ -27,11 +28,11 @@ Role Variables
 | `logger_syslog_address`           | N/A                              | Syslog address/domain name to send logs.
 | `logger_syslog_port`              | 514                              | Port to use for syslog logging.
 | `logger_file_filename`            | /var/log/opencanary.log          | File path/name of local log.
-| `smtp_mailhost`                   | N/A                              | Mail server to use
-| `smtp_port`                       | 25                               | SMTP port to mail server
-| `smtp_from_addr`                  | N/A                              | From address
-| `smtp_to_addr`                    | N/A                              | To Address
-| `smtp_subject`                    | OpenCanary Alert                 | Email subject
+| `smtp_mailhost`                   | N/A                              | Mail server to use.
+| `smtp_port`                       | 25                               | SMTP port to mail server.
+| `smtp_from_addr`                  | N/A                              | From address.
+| `smtp_to_addr`                    | N/A                              | To Address.
+| `smtp_subject`                    | OpenCanary Alert                 | Email subject.
 | `slack_webhook_url`               | N/A                              | Incoming Slack Webhook URL for Slack Alerts.
 | `teams_webhook_url`               | N/A                              | Incoming Teams Webhook URL for Teams Alerts.
 | `portscan_enabled`                | false                            | Enable port scan canary.
