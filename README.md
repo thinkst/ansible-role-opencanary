@@ -35,6 +35,7 @@ Role Variables
 | `slack_webhook_url`               | N/A                              | Incoming Slack Webhook URL for Slack Alerts.
 | `teams_webhook_url`               | N/A                              | Incoming Teams Webhook URL for Teams Alerts.
 | `portscan_enabled`                | false                            | Enable port scan canary.
+| `portscan_ignore_localhost`       | false                            | Disables portscan for localhost.
 | `portscan_logfile`                | /var/log/kern.log                | Log file scanned by port scan canary.
 | `portscan_synrate`                | 5                                | SYN rate for port scan canary.
 | `portscan_nmaposrate`             | 5                                | Nmap OS rate for port scan canary.
