@@ -1,7 +1,7 @@
 ---
 
 opencanary_install_dir: "/opt/opencanary"
-opencanary_version: ""
+opencanary_version: latest
 
 # opencanary conf file defaults
 device_node_id: "opencanary-{{ ansible_hostname }}"
