@@ -1,6 +1,6 @@
 ---
-- include: dependencies.yml
+- include_tasks: dependencies.yml
   tags: [ install ]
 
-- include: opencanary.yml
+- include_tasks: opencanary.yml
   tags: [ install, update ]

@@ -35,6 +35,11 @@ Role Variables
 | `smtp_subject`                    | OpenCanary Alert                 | Email subject.
 | `slack_webhook_url`               | N/A                              | Incoming Slack Webhook URL for Slack Alerts.
 | `teams_webhook_url`               | N/A                              | Incoming Teams Webhook URL for Teams Alerts.
+| `webhook_url`                     | N/A                              | Generic Webhook URL.
+| `webhook_method`                  | POST                             | HTTP method to use (GET, POST, PUT).
+| `webhook_data`                    | '{"message": "%(message)s"}'     | Data to be sent to webhook.
+| `webhook_status_code`             | 200                              | HTTP status code that is expected for a success.
+| `webhook_ignore`                  | N/A                              | List of strings that will not emit any log that contains the pattern. ie "192.0.2."
 | `portscan_enabled`                | false                            | Enable port scan canary.
 | `portscan_ignore_localhost`       | false                            | Disables portscan for localhost.
 | `portscan_logfile`                | /var/log/kern.log                | Log file scanned by port scan canary.

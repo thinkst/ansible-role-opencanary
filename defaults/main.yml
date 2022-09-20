@@ -20,6 +20,10 @@ httpproxy_port: "8080"
 httpproxy_skin: "ms-isa"
 logger_file_filename: "/var/log/opencanary.log"
 logger_syslog_port: 514
+webhook_method: "POST"
+webhook_data: '{"message": "%(message)s"}'
+webhook_status_code: 200
+webhook_ignore: [ ]
 smtp_port: 25
 smtp_subject: "OpenCanary Alert"
 portscan_enabled: "false"
