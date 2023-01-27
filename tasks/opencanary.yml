@@ -31,9 +31,6 @@
       set_fact:
         opencanary_tar: "{{ opencanary_tar_name.stdout }}"
 
-    - debug:
-        msg: "{{ opencanary_tar }}"
-
     - name: Install opencanary git
       pip:
         name: 'file://{{ github_src_dir }}/opencanary-{{ opencanary_version }}/dist/{{ opencanary_tar }}'
