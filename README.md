@@ -11,6 +11,8 @@ Role Variables
 | --------------------------------- | -------------------------------- | ------------------------
 | `opencanary_install_dir`          | /opt/opencanary                  | Install directory for opencanary virtual environment.
 | `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org.
+| `install_source`                  | pypi                             | Specifies where to get the install from PyPi.org or GitHub.
+| `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
 | `ip_ignorelist`                   | N/A                              | CIDR space delimited list of IP addresses.
 | `git_enabled`                     | false                            | Enable git canary.
@@ -99,8 +101,10 @@ Example Playbook
 
     - hosts: canaries
       roles:
-        - role: theidiotyouyellat.opencanary
+        - role: ansible-opencanary
           vars:
+            opencanary_version: 0.8.0
+            install_source: github
             portscan_enabled: "true"
             ssh_enabled: "true"
 

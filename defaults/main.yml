@@ -2,6 +2,9 @@
 
 opencanary_install_dir: "/opt/opencanary"
 opencanary_version: latest
+install_source: "pypi"
+
+github_src_dir: "/opt/opencanary_src"
 
 # opencanary conf file defaults
 device_node_id: "opencanary-{{ ansible_hostname }}"
