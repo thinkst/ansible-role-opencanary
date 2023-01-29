@@ -1,12 +1,36 @@
---- 
-- name: Install dependencies
-  apt:
-    name: "{{ apt_packages }}"
-    state: latest
-    update_cache: yes
+---
+- block:
+  - name: Install dependencies
+    apt:
+      name: "{{ apt_packages }}"
+      state: latest
+      update_cache: yes
 
-- name: Install Samaba 
-  apt:
-    name: samba
-    state: latest
-  when: smb_enabled == "true"
+  - name: Install Samaba
+    apt:
+      name: samba
+      state: latest
+    when: smb_enabled == "true"
+  when: ansible_facts['os_family'] == "Debian"
+
+- block:
+  - name: Install dependencies
+    dnf:
+      name: "{{ dnf_packages }}"
+      state: latest
+      update_cache: yes
+    when: ansible_facts['distribution_major_version'] == "8"
+
+  - name: Install dependencies
+    dnf:
+      name: "{{ dnf_9_packages }}"
+      state: latest
+      update_cache: yes
+    when: ansible_facts['distribution_major_version'] == "9"
+
+  - name: Install Samaba
+    dnf:
+      name: samba
+      state: latest
+    when: smb_enabled == "true"
+  when: ansible_facts['os_family'] == "RedHat"

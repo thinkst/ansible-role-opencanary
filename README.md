@@ -10,7 +10,7 @@ Role Variables
 | **Name**                          | **Default Value**                | **Description**
 | --------------------------------- | -------------------------------- | ------------------------
 | `opencanary_install_dir`          | /opt/opencanary                  | Install directory for opencanary virtual environment.
-| `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org.
+| `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org/GitHub Releases.
 | `install_source`                  | pypi                             | Specifies where to get the install from PyPi.org or GitHub.
 | `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
