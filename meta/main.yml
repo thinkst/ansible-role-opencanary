@@ -5,15 +5,20 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.7.0
   platforms:
+    - name: EL
+      versions:
+        - 8
+        - 9
     - name: Ubuntu
       versions:
         - bionic
         - focal
+        - jammy
     - name: Debian
       versions:
         - stretch
         - buster
-  galaxy_tags: 
+  galaxy_tags:
     - honeypot
     - opencanary
     - security
