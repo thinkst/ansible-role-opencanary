@@ -1,6 +1,6 @@
 ---
 - block:
-  - name: Install dependencies
+  - name: Install dependencies - APT
     apt:
       name: "{{ apt_packages }}"
       state: latest
@@ -14,7 +14,7 @@
   when: ansible_facts['os_family'] == "Debian"
 
 - block:
-  - name: Install dependencies
+  - name: Install dependencies - DNF
     dnf:
       name: "{{ dnf_packages }}"
       state: latest
