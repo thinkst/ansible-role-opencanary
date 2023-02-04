@@ -7,29 +7,24 @@
         state: directory
         mode: '0755'
 
-    - name: Clone Git Release
-      get_url:
-        url: 'https://github.com/thinkst/opencanary/archive/refs/tags/v{{ opencanary_version }}.tar.gz'
+    - name: Clone GitHub repo
+      git:
+        repo: https://github.com/thinkst/opencanary.git
         dest: "{{ github_src_dir }}"
-
-    - name: Untar Git Release
-      unarchive:
-        src: '{{ github_src_dir }}/opencanary-{{ opencanary_version }}.tar.gz'
-        dest: "{{ github_src_dir }}"
-        remote_src: yes
+        version: "{{ opencanary_version }}"
 
     - name: Build Git Release
-      shell: 'python3 {{ github_src_dir }}/opencanary-{{ opencanary_version }}/setup.py sdist'
+      shell: 'python3 {{ github_src_dir }}/setup.py sdist'
       args:
-        chdir: '{{ github_src_dir }}/opencanary-{{ opencanary_version }}'
+        chdir: '{{ github_src_dir }}'
 
     - name: Get opencanary_tar location
-      shell: 'ls {{ github_src_dir }}/opencanary-{{ opencanary_version }}/dist'
+      shell: 'ls {{ github_src_dir }}/dist'
       register: opencanary_tar_name
 
     - name: Install opencanary git
       pip:
-        name: 'file://{{ github_src_dir }}/opencanary-{{ opencanary_version }}/dist/{{ opencanary_tar_name.stdout }}'
+        name: 'file://{{ github_src_dir }}/dist/{{ opencanary_tar_name.stdout }}'
         virtualenv: "{{ opencanary_install_dir }}"
         virtualenv_command: "/usr/bin/python3 -m venv"
   when: install_source == "github"

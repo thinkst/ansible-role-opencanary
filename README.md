@@ -1,8 +1,34 @@
-Role Name
+Role Description
 =========
 
-Installs [Thinkst OpenCanary](https://github.com/thinkst/opencanary) and it's dependencies.
+Installs [Thinkst OpenCanary](https://github.com/thinkst/opencanary) and configures options.
 
+Example Playbooks
+----------------
+
+### Install from Github Branch
+
+    - hosts: canaries
+      roles:
+        - role: ansible-role-opencanary
+          vars:
+            opencanary_version: master
+            install_source: github
+            portscan_enabled: "true"
+            ssh_enabled: "true"
+            ssh_port: 2222
+
+### Install from PyPi.Org
+
+    - hosts: canaries
+      roles:
+        - role: ansible-role-opencanary
+          vars:
+            opencanary_version: 0.7.1
+            portscan_enabled: "true"
+            mssql_enabled: "true"
+            smb_enabled: "true"
+            samba_share: "E$"
 
 Role Variables
 --------------
@@ -10,7 +36,7 @@ Role Variables
 | **Name**                          | **Default Value**                | **Description**
 | --------------------------------- | -------------------------------- | ------------------------
 | `opencanary_install_dir`          | /opt/opencanary                  | Install directory for opencanary virtual environment.
-| `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org/GitHub Releases.
+| `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org/GitHub Tag/Branch.
 | `install_source`                  | pypi                             | Specifies where to get the install from PyPi.org or GitHub.
 | `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
@@ -96,17 +122,6 @@ Role Variables
 | `vnc_enabled`                     | false                            | Enable vnc canary.
 | `vnc_port`                        | 5000                             | Port to use for vnc canary.
 
-Example Playbook
-----------------
-
-    - hosts: canaries
-      roles:
-        - role: ansible-opencanary
-          vars:
-            opencanary_version: 0.8.0
-            install_source: github
-            portscan_enabled: "true"
-            ssh_enabled: "true"
 
 License
 -------
