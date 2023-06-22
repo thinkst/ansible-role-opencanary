@@ -50,6 +50,11 @@ Role Variables
 | `http_enabled`                    | false                            | Enable http canary.
 | `http_port`                       | 80                               | Port for http canary.
 | `http_skin`                       | basicLogin                       | Skin to use for http canary. (basicLogin, nasLogin)
+| `https_enabled`                   | false                            | Enable https canary.
+| `https_port`                      | 443                              | Port for https canary.
+| `https_skin`                      | basicLogin                       | Skin to use for https canary.
+| `https_certificate`               | N/A                              | Certificate for https canary.
+| `https_key   `                    | N/A                              | Key for certificate for https canary.
 | `httpproxy_enabled`               | false                            | Enable http proxy canary.
 | `httpproxy_port`                  | 8080                             | Port for http proxy canary.
 | `httpproxy_skin`                  | ms-isa                           | Skin to use for http proxy canary. (snort, ms-isa)

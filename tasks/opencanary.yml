@@ -53,7 +53,7 @@
   template:
     src: opencanaryd_service.jn2
     dest: /etc/systemd/system/opencanaryd.service
-    
+
 - name: Install opencanary config
   template:
     src: opencanary_conf.jn2

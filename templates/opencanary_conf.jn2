@@ -20,6 +20,11 @@
             "name": "nasLogin"
         }
     ],
+    "https.enabled": {{ https_enabled }},
+    "https.port": "{{ https_port }}",
+    "https.skin": "{{ https_skin }}",
+    "https.certificate": "{{ https_certificate }}",
+    "https.key": "{{ https_key }}",
     "httpproxy.enabled" : {{ httpproxy_enabled }},
     "httpproxy.port": {{ httpproxy_port }},
     "httpproxy.skin": "{{ httpproxy_skin }}",
