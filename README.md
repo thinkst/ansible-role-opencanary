@@ -41,6 +41,7 @@ Role Variables
 | `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
 | `ip_ignorelist`                   | N/A                              | CIDR space delimited list of IP addresses.
+| `logtype_ignorelist`              | N/A                              | Space delimited list of log codetypes to ignore.
 | `git_enabled`                     | false                            | Enable git canary.
 | `git_port`                        | 9418                             | Port for git canary.
 | `ftp_enabled`                     | false                            | Enable ftp canary.

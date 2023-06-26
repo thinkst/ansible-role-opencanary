@@ -1,6 +1,7 @@
 {
     "device.node_id": "{{ device_node_id }}",
     "ip.ignorelist": [ {{  ip_ignorelist }} ],
+    "logtype.ignorelist": [ {{ logtype_ignorelist }} ],
     "git.enabled": {{ git_enabled }},
     "git.port" : {{ git_port }},
     "ftp.enabled": {{ ftp_enabled }},

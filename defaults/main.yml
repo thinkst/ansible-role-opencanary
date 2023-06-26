@@ -9,6 +9,7 @@ github_src_dir: "/opt/opencanary_src"
 # opencanary conf file defaults
 device_node_id: "opencanary-{{ ansible_hostname }}"
 ip_ignorelist: [ ]
+logtype_ignorelist: [ ]
 git_enabled: "false"
 git_port: "9418"
 ftp_enabled: "false"
