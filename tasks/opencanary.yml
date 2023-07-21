@@ -61,6 +61,17 @@
   register: config
 
 - block:
+  - name: Get python venv version
+    command: 'ls "{{ opencanary_install_dir }}/lib"'
+    register: dir
+
+  - name: HTTP/HTTPS custom skin copy
+    copy:
+      src: "{{ http_customskin_folder }}"
+      dest: "{{ opencanary_install_dir }}/lib/{{ dir.stdout }}/site-packages/opencanary/modules/data/http/skin/"
+  when: http_customskin_folder is defined
+
+- block:
     - name: Create {{ samba_path }}
       file:
         path: "{{ samba_path }}"

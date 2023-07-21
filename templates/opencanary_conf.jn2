@@ -19,7 +19,11 @@
         {
             "desc": "Synology NAS Login",
             "name": "nasLogin"
-        }
+        }{% if http_customskin_folder is defined %},
+        {
+            "desc": "Custom HTTP Skin",
+            "name": "{{ http_skin }}"
+        }{% endif %}
     ],
     "https.enabled": {{ https_enabled }},
     "https.port": "{{ https_port }}",

@@ -51,6 +51,7 @@ Role Variables
 | `http_enabled`                    | false                            | Enable http canary.
 | `http_port`                       | 80                               | Port for http canary.
 | `http_skin`                       | basicLogin                       | Skin to use for http canary. (basicLogin, nasLogin)
+| `http_customskin_folder`          | N/A                              | Folder to copy to HTTP skin folder. Place in same directory as playbook or specify path relatic to playbook.
 | `https_enabled`                   | false                            | Enable https canary.
 | `https_port`                      | 443                              | Port for https canary.
 | `https_skin`                      | basicLogin                       | Skin to use for https canary.
