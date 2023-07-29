@@ -78,7 +78,7 @@
         state: directory
         mode: "0777"
 
-    - name: Configure Samba 
+    - name: Configure Samba
       template:
         src: samba_conf.jn2
         dest: /etc/samba/smb.conf
@@ -87,6 +87,7 @@
       template:
         src: samba_audit.jn2
         dest: /etc/rsyslog.d/smb_audit.conf
+      notify: restart rsyslog
   when: smb_enabled == "true"
 
 - name: Enable opencanaryd.service
