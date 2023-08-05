@@ -104,6 +104,7 @@
     "portscan.synrate": {{ portscan_synrate }},
     "portscan.nmaposrate": {{ portscan_nmaposrate }},
     "portscan.lorate": {{ portscan_lorate }},
+    "portscan.ignore_ports": [ {{  portscan_ignore_ports }} ],
     "smb.auditfile": "{{ smb_auditfile }}",
     "smb.enabled": {{ smb_enabled }},
     "mysql.enabled": {{ mysql_enabled }},

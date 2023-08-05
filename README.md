@@ -81,6 +81,7 @@ Role Variables
 | `portscan_synrate`                | 5                                | SYN rate for port scan canary.
 | `portscan_nmaposrate`             | 5                                | Nmap OS rate for port scan canary.
 | `portscan_lorate`                 | 3                                | LO rate for port scan canary.
+| `portscan_ignore_ports `          | N/A                              | Comma separated list of ports to ignore.
 | `smb_auditfile`                   | /var/log/samba-audit.log         | Samba log for samba canary to watch.
 | `smb_enabled`                     | false                            | Enable samba canary.
 | `samba_workgroup`                 | WORKGROUP                        | Samba workgroup name.

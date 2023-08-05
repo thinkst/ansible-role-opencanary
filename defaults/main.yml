@@ -41,6 +41,7 @@ portscan_logfile: "/var/log/kern.log"
 portscan_synrate: "5"
 portscan_nmaposrate: "5"
 portscan_lorate: "3"
+portscan_ignore_ports: [ ]
 smb_auditfile: "/var/log/samba-audit.log"
 smb_enabled: "false"
 mysql_enabled: "false"
