@@ -105,7 +105,9 @@
     "portscan.nmaposrate": {{ portscan_nmaposrate }},
     "portscan.lorate": {{ portscan_lorate }},
     "portscan.ignore_ports": [ {{  portscan_ignore_ports }} ],
-    "smb.auditfile": "{{ smb_auditfile }}",
+    {% if portscan_iptables_path is defined %}
+"portscan.iptables_path": "{{ portscan_iptables_path }}",
+    {% endif %}"smb.auditfile": "{{ smb_auditfile }}",
     "smb.enabled": {{ smb_enabled }},
     "mysql.enabled": {{ mysql_enabled }},
     "mysql.port": {{ mysql_port }},
