@@ -1,14 +1,14 @@
-- name: start opencanaryd
+- name: Start opencanaryd
   systemd:
     name: opencanaryd
     state: restarted
 
-- name: stop opencanaryd
+- name: Stop opencanaryd
   systemd:
     name: opencanaryd
     state: stopped
 
-- name: restart rsyslog
+- name: Restart rsyslog
   systemd:
     name: rsyslogd
     state: restarted

@@ -39,10 +39,12 @@
 
 - name: Install optional python dependencies
   pip:
-    name: scapy
+    name:
+      - scapy
+      - pcapy-ng
     virtualenv: "{{ opencanary_install_dir }}"
     virtualenv_command: "/usr/bin/python3 -m venv"
-  when: ansible_facts['os_family'] == "RedHat"
+  when: snmp_enabled == "true"
 
 - name: Create /etc/opencanary
   file:
@@ -87,7 +89,7 @@
       template:
         src: samba_audit.jn2
         dest: /etc/rsyslog.d/smb_audit.conf
-      notify: restart rsyslog
+      notify: Restart rsyslogd
   when: smb_enabled == "true"
 
 - name: Enable opencanaryd.service
@@ -96,9 +98,9 @@
     enabled: yes
     masked: no
     daemon_reload: yes
-  notify: start opencanaryd
+  notify: Start opencanaryd
 
 - name: Restart opencanaryd
   command: echo restart opencanaryd
-  notify: start opencanaryd
+  notify: Start opencanaryd
   when: config.changed
