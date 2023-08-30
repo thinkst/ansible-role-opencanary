@@ -8,7 +8,7 @@
     name: opencanaryd
     state: stopped
 
-- name: Restart rsyslog
+- name: Restart rsyslogd
   systemd:
     name: rsyslogd
     state: restarted
