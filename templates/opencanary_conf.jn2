@@ -1,6 +1,6 @@
 {
     "device.node_id": "{{ device_node_id }}",
-    "ip.ignorelist": [ {{  ip_ignorelist }} ],
+    "ip.ignorelist": [ {{  ip_ignorelist|map("to_json")|join(", ") }} ],
     "logtype.ignorelist": [ {{ logtype_ignorelist }} ],
     "git.enabled": {{ git_enabled }},
     "git.port" : {{ git_port }},
