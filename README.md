@@ -30,7 +30,7 @@ Example Playbooks
             smb_enabled: "true"
             samba_share: "E$"
 
-### Install from PyPi.Org an ignore IP's
+### Install from PyPi.Org and ignore IP's
 
     - hosts: canaries
       roles:
