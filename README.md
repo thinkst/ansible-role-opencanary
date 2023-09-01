@@ -24,7 +24,22 @@ Example Playbooks
       roles:
         - role: ansible-role-opencanary
           vars:
-            opencanary_version: 0.7.1
+            opencanary_version: 0.9.0
+            portscan_enabled: "true"
+            mssql_enabled: "true"
+            smb_enabled: "true"
+            samba_share: "E$"
+
+### Install from PyPi.Org an ignore IP's
+
+    - hosts: canaries
+      roles:
+        - role: ansible-role-opencanary
+          vars:
+            opencanary_version: 0.9.0
+            ip_ignorelist:
+              - 192.168.1.54/24
+              - 192.168.1.154/24
             portscan_enabled: "true"
             mssql_enabled: "true"
             smb_enabled: "true"
