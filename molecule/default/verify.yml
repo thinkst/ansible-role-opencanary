@@ -4,6 +4,7 @@
   hosts: opencanarygroup
   gather_facts: true
   vars:
+    smb_enabled: false
     pkg_test: samba
     opencanary_install_dir: "/opt/opencanary"
     bin: "{{ opencanary_install_dir }}/bin/opencanaryd"
@@ -38,6 +39,7 @@
     - name: Validate that needed packages are present
       ansible.builtin.assert:
         that: ansible_facts.packages[pkg_test]
+      when: smb_enabled | bool
 
     - name: Check executable
       ansible.builtin.stat:
