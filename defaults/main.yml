@@ -91,3 +91,5 @@ samba_netbios_name: "{{ ansible_hostname }}"
 samba_share: personal
 samba_comment: "Personal docs"
 samba_path: "/opt/{{ samba_share }}"
+
+is_container: false

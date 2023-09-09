@@ -113,3 +113,4 @@
     masked: false
     daemon_reload: true
   notify: Start opencanaryd
+  when: not is_container | bool
