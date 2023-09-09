@@ -21,7 +21,7 @@ jobs:
       matrix:
         include:
           - molecule_distro: 'rockylinux:9'
-            experimental: false
+            experimental: true
           - molecule_distro: 'rockylinux:8'
             experimental: true
           - molecule_distro: 'ubuntu:22.04'
