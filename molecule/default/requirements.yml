@@ -2,3 +2,6 @@
 
 collections:
   - name: ansible.posix
+
+roles:
+  - name: juju4.redhat_epel

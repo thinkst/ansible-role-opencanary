@@ -31,4 +31,5 @@
       ansible.builtin.debug:
         var: ansible_virtualization_type
   roles:
+    - { role: juju4.redhat_epel, when: ansible_os_family == "RedHat" and ansible_distribution != "Fedora"}
     - theidiotyouyellat.opencanary
