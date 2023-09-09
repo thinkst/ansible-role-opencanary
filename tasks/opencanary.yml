@@ -32,6 +32,15 @@
         virtualenv: "{{ opencanary_install_dir }}"
         virtualenv_command: "/usr/bin/python3 -m venv"
 
+    - name: RedHat8 | Upgrade pip setuptools
+      ansible.builtin.pip:
+        name: setuptools
+        extra_args: --upgrade
+        virtualenv: "{{ opencanary_install_dir }}"
+        virtualenv_command: "/usr/bin/python3 -m venv"
+      when:
+        - (ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 8)
+
 - name: Install opencanary
   ansible.builtin.pip:
     name: opencanary
