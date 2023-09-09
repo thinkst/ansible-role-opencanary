@@ -1,6 +1,8 @@
 ---
-- include_tasks: dependencies.yml
-  tags: [ install ]
+- name: Include dependencies
+  ansible.builtin.include_tasks: dependencies.yml
+  tags: [install]
 
-- include_tasks: opencanary.yml
-  tags: [ install, update ]
+- name: Include opencanary
+  ansible.builtin.include_tasks: opencanary.yml
+  tags: [install, update]

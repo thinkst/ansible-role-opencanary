@@ -1,14 +1,21 @@
+---
+
 - name: Start opencanaryd
-  systemd:
+  ansible.builtin.systemd:
     name: opencanaryd
     state: restarted
 
 - name: Stop opencanaryd
-  systemd:
+  ansible.builtin.systemd:
     name: opencanaryd
     state: stopped
 
 - name: Restart rsyslog
-  systemd:
+  ansible.builtin.systemd:
     name: rsyslogd
+    state: restarted
+
+- name: Restart opencanaryd
+  ansible.builtin.service:
+    name: opencanaryd
     state: restarted

@@ -102,7 +102,7 @@
       ansible.builtin.pip:
         name: pip-audit
         state: present
-      become: yes
+      become: true
     - name: Pip list
       ansible.builtin.command: pip list
       changed_when: false
@@ -111,7 +111,7 @@
       ansible.builtin.pip:
         name: pipdeptree
         state: present
-      become: yes
+      become: true
     - name: Pipdeptree
       ansible.builtin.command: pipdeptree -r
       changed_when: false
