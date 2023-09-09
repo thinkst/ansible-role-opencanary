@@ -21,16 +21,19 @@
       ansible.builtin.dnf:
         name: "{{ dnf_packages }}"
         state: present
+        update_cache: true
       when: ansible_facts['distribution_major_version'] == "8"
 
     - name: Install dependencies
       ansible.builtin.dnf:
         name: "{{ dnf_9_packages }}"
         state: present
+        update_cache: true
       when: ansible_facts['distribution_major_version'] == "9"
 
     - name: Install Samba
       ansible.builtin.dnf:
         name: samba
         state: present
+        update_cache: true
       when: smb_enabled == "true"
