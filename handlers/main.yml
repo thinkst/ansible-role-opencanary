@@ -1,14 +1,25 @@
+---
+
 - name: Start opencanaryd
-  systemd:
+  ansible.builtin.systemd:
     name: opencanaryd
     state: restarted
+  when: not is_container | bool
 
 - name: Stop opencanaryd
-  systemd:
+  ansible.builtin.systemd:
     name: opencanaryd
     state: stopped
+  when: not is_container | bool
 
 - name: Restart rsyslogd
-  systemd:
+  ansible.builtin.systemd:
     name: rsyslogd
     state: restarted
+  when: not is_container | bool
+
+- name: Restart opencanaryd
+  ansible.builtin.service:
+    name: opencanaryd
+    state: restarted
+  when: not is_container | bool

@@ -1,0 +1,128 @@
+---
+
+- name: Verify
+  hosts: opencanarygroup
+  gather_facts: true
+  vars:
+    smb_enabled: false
+    pkg_test: samba
+    opencanary_install_dir: "/opt/opencanary"
+    bin: "{{ opencanary_install_dir }}/bin/opencanaryd"
+    config: "/etc/opencanaryd/opencanary.conf"
+    ports:
+      # canary
+      - { h: localhost, p: 9418 }
+      - { h: localhost, p: 21 }
+      - { h: localhost, p: 80 }
+    is_container: false
+  pre_tasks:
+    - name: Debug | var ansible_virtualization_type
+      ansible.builtin.debug:
+        var: ansible_virtualization_type
+    - name: Set fact is_container
+      ansible.builtin.set_fact:
+        is_container: true
+      when: >
+        (ansible_virtualization_type is defined and
+          (ansible_virtualization_type == "docker" or ansible_virtualization_type == "containerd"
+           or ansible_virtualization_type == "container"
+          )
+        )
+    - name: RedHat | Set fact
+      ansible.builtin.set_fact:
+        pkg_test: python3-devel
+      when: ansible_os_family == 'RedHat'
+  tasks:
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: Validate that needed packages are present
+      ansible.builtin.assert:
+        that: ansible_facts.packages[pkg_test]
+      when: smb_enabled | bool
+
+    - name: Check executable
+      ansible.builtin.stat:
+        path: "{{ bin }}"
+      register: bin1
+    - name: Validate executable is present
+      ansible.builtin.assert:
+        that: bin1.stat.exists and bin1.stat.size != 0 and bin1.stat.mode == '0755'
+
+    - name: Check config file
+      ansible.builtin.stat:
+        path: "{{ config }}"
+      register: cfg1
+    - name: Validate configuration files are present
+      ansible.builtin.assert:
+        that: cfg1.stat.exists and cfg1.stat.size != 0
+
+    - name: Ensure opencanaryd running
+      ansible.builtin.command: pgrep -u root opencanaryd
+      register: ps3
+      changed_when: false
+      failed_when: false
+    - name: Validate ps output
+      ansible.builtin.assert:
+        that: ps3.stdout
+      when:
+        - not is_container|bool
+
+    - name: Ensure procps package is present
+      ansible.builtin.package:
+        name: procps
+        state: present
+      when: ansible_os_family == "RedHat"
+    - name: Check all processes
+      ansible.builtin.command: ps aux
+      changed_when: false
+      register: psa
+    - name: Debug | ps aux output
+      ansible.builtin.debug:
+        var: psa
+        verbosity: 1
+
+    - name: Ensure ports are listening
+      ansible.builtin.wait_for:
+        host: "{{ item.h }}"
+        port: "{{ item.p }}"
+        timeout: 10
+      with_items: "{{ ports }}"
+      when:
+        - not is_container|bool
+
+    - name: Pip outdated
+      ansible.builtin.command: pip list --outdated --path /usr/local/
+      changed_when: false
+      register: outdated
+    - name: Validate no outdated python pip
+      ansible.builtin.assert:
+        that:
+          - "'Package' not in outdated.stdout"
+
+    - name: Ensure pip-audit is present
+      ansible.builtin.pip:
+        name: pip-audit
+        state: present
+      become: true
+    - name: Pip list
+      ansible.builtin.command: pip list
+      changed_when: false
+      failed_when: false
+    - name: Ensure pipdeptree is present
+      ansible.builtin.pip:
+        name: pipdeptree
+        state: present
+      become: true
+    - name: Pipdeptree
+      ansible.builtin.command: pipdeptree -r
+      changed_when: false
+      failed_when: false
+    - name: Pip-audit
+      ansible.builtin.command: pip-audit --path /usr/local
+      changed_when: false
+      register: audit
+    - name: Validate no known vulnerabilities from pip-audit
+      ansible.builtin.assert:
+        that:
+          - "'No known vulnerabilities found' in audit.stderr"

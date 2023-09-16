@@ -8,8 +8,8 @@ github_src_dir: "/opt/opencanary_src"
 
 # opencanary conf file defaults
 device_node_id: "opencanary-{{ ansible_hostname }}"
-ip_ignorelist: [ ]
-logtype_ignorelist: [ ]
+ip_ignorelist: []
+logtype_ignorelist: []
 git_enabled: "false"
 git_port: "9418"
 ftp_enabled: "false"
@@ -32,7 +32,7 @@ logger_syslog_port: 514
 webhook_method: "POST"
 webhook_data: '{"message": "%(message)s"}'
 webhook_status_code: 200
-webhook_ignore: [ ]
+webhook_ignore: []
 smtp_port: 25
 smtp_subject: "OpenCanary Alert"
 portscan_enabled: "false"
@@ -41,7 +41,7 @@ portscan_logfile: "/var/log/kern.log"
 portscan_synrate: "5"
 portscan_nmaposrate: "5"
 portscan_lorate: "3"
-portscan_ignore_ports: [ ]
+portscan_ignore_ports: []
 smb_auditfile: "/var/log/samba-audit.log"
 smb_enabled: "false"
 mysql_enabled: "false"
@@ -91,3 +91,5 @@ samba_netbios_name: "{{ ansible_hostname }}"
 samba_share: personal
 samba_comment: "Personal docs"
 samba_path: "/opt/{{ samba_share }}"
+
+is_container: false

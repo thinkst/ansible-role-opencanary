@@ -1,36 +1,48 @@
 ---
 
-- block:
+- name: Github source install
+  when: install_source == "github"
+  block:
     - name: Create download directory
-      file:
+      ansible.builtin.file:
         path: "{{ github_src_dir }}"
         state: directory
         mode: '0755'
 
     - name: Clone GitHub repo
-      git:
+      ansible.builtin.git:
         repo: https://github.com/thinkst/opencanary.git
         dest: "{{ github_src_dir }}"
         version: "{{ opencanary_version }}"
 
     - name: Build Git Release
-      shell: 'python3 {{ github_src_dir }}/setup.py sdist'
+      ansible.builtin.command:  # noqa no-changed-when
+        cmd: 'python3 {{ github_src_dir }}/setup.py sdist'
       args:
         chdir: '{{ github_src_dir }}'
 
     - name: Get opencanary_tar location
-      shell: 'ls {{ github_src_dir }}/dist'
+      ansible.builtin.command: 'ls {{ github_src_dir }}/dist'
       register: opencanary_tar_name
+      changed_when: false
 
     - name: Install opencanary git
-      pip:
+      ansible.builtin.pip:
         name: 'file://{{ github_src_dir }}/dist/{{ opencanary_tar_name.stdout }}'
         virtualenv: "{{ opencanary_install_dir }}"
         virtualenv_command: "/usr/bin/python3 -m venv"
-  when: install_source == "github"
+
+- name: RedHat8 | Upgrade pip setuptools
+  ansible.builtin.pip:
+    name: setuptools
+    extra_args: --upgrade
+    virtualenv: "{{ opencanary_install_dir }}"
+    virtualenv_command: "/usr/bin/python3 -m venv"
+  when:
+    - (ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 8)
 
 - name: Install opencanary
-  pip:
+  ansible.builtin.pip:
     name: opencanary
     virtualenv: "{{ opencanary_install_dir }}"
     virtualenv_command: "/usr/bin/python3 -m venv"
@@ -38,7 +50,7 @@
   when: install_source == "pypi"
 
 - name: Install optional python dependencies
-  pip:
+  ansible.builtin.pip:
     name:
       - scapy
       - pcapy-ng
@@ -47,60 +59,67 @@
   when: snmp_enabled == "true"
 
 - name: Create /etc/opencanary
-  file:
+  ansible.builtin.file:
     path: /etc/opencanaryd
     state: directory
+    mode: '0755'
 
 - name: Install opencanaryd.service
-  template:
+  ansible.builtin.template:
     src: opencanaryd_service.jn2
     dest: /etc/systemd/system/opencanaryd.service
+    mode: '0644'
 
 - name: Install opencanary config
-  template:
+  ansible.builtin.template:
     src: opencanary_conf.jn2
     dest: /etc/opencanaryd/opencanary.conf
+    mode: '0644'
   register: config
+  notify:
+    - Restart opencanaryd
 
-- block:
-  - name: Get python venv version
-    command: 'ls "{{ opencanary_install_dir }}/lib"'
-    register: dir
-
-  - name: HTTP/HTTPS custom skin copy
-    copy:
-      src: "{{ http_customskin_folder }}"
-      dest: "{{ opencanary_install_dir }}/lib/{{ dir.stdout }}/site-packages/opencanary/modules/data/http/skin/"
+- name: HTTP custom skin enabled
   when: http_customskin_folder is defined
+  block:
+    - name: Get python venv version
+      ansible.builtin.command: 'ls "{{ opencanary_install_dir }}/lib"'
+      register: dir
+      changed_when: false
 
-- block:
+    - name: HTTP/HTTPS custom skin copy
+      ansible.builtin.copy:
+        src: "{{ http_customskin_folder }}"
+        dest: "{{ opencanary_install_dir }}/lib/{{ dir.stdout }}/site-packages/opencanary/modules/data/http/skin/"
+        mode: '0755'
+
+- name: Samba enabled
+  when: smb_enabled == "true"
+  block:
     - name: Create {{ samba_path }}
-      file:
+      ansible.builtin.file:
         path: "{{ samba_path }}"
         state: directory
         mode: "0777"
 
     - name: Configure Samba
-      template:
+      ansible.builtin.template:
         src: samba_conf.jn2
         dest: /etc/samba/smb.conf
+        mode: '0644'
 
     - name: Configure Samba Audit
-      template:
+      ansible.builtin.template:
         src: samba_audit.jn2
         dest: /etc/rsyslog.d/smb_audit.conf
+        mode: '0644'
       notify: Restart rsyslogd
-  when: smb_enabled == "true"
 
 - name: Enable opencanaryd.service
-  systemd:
+  ansible.builtin.systemd:
     name: opencanaryd
-    enabled: yes
-    masked: no
-    daemon_reload: yes
+    enabled: true
+    masked: false
+    daemon_reload: true
   notify: Start opencanaryd
-
-- name: Restart opencanaryd
-  command: echo restart opencanaryd
-  notify: Start opencanaryd
-  when: config.changed
+  when: not is_container | bool

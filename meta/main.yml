@@ -1,14 +1,15 @@
+---
 galaxy_info:
   role_name: opencanary
   author: theidiotyouyellat
   description: Configures an OpenCanary honeypot
   license: MIT
-  min_ansible_version: 2.7.0
+  min_ansible_version: '2.7.0'
   platforms:
     - name: EL
       versions:
-        - 8
-        - 9
+        - '8'
+        - '9'
     - name: Ubuntu
       versions:
         - bionic
