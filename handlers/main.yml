@@ -12,7 +12,7 @@
     state: stopped
   when: not is_container | bool
 
-- name: Restart rsyslog
+- name: Restart rsyslogd
   ansible.builtin.systemd:
     name: rsyslogd
     state: restarted

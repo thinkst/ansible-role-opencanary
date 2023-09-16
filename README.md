@@ -24,7 +24,22 @@ Example Playbooks
       roles:
         - role: ansible-role-opencanary
           vars:
-            opencanary_version: 0.7.1
+            opencanary_version: 0.9.0
+            portscan_enabled: "true"
+            mssql_enabled: "true"
+            smb_enabled: "true"
+            samba_share: "E$"
+
+### Install from PyPi.Org and ignore IP's
+
+    - hosts: canaries
+      roles:
+        - role: ansible-role-opencanary
+          vars:
+            opencanary_version: 0.9.0
+            ip_ignorelist:
+              - 192.168.1.54/24
+              - 192.168.1.154/24
             portscan_enabled: "true"
             mssql_enabled: "true"
             smb_enabled: "true"
@@ -40,7 +55,7 @@ Role Variables
 | `install_source`                  | pypi                             | Specifies where to get the install from PyPi.org or GitHub.
 | `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
 | `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
-| `ip_ignorelist`                   | N/A                              | CIDR space delimited list of IP addresses.
+| `ip_ignorelist`                   | N/A                              | Ansible list of IP addresses using CIDR notation.
 | `logtype_ignorelist`              | N/A                              | Space delimited list of log codetypes to ignore.
 | `git_enabled`                     | false                            | Enable git canary.
 | `git_port`                        | 9418                             | Port for git canary.
