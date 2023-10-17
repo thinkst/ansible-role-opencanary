@@ -6,7 +6,7 @@
       state: latest
       update_cache: yes
 
-  - name: Install Samaba
+  - name: Install Samba
     apt:
       name: samba
       state: latest
