@@ -26,7 +26,7 @@
         }{% endif %}
     ],
     "https.enabled": {{ https_enabled }},
-    "https.port": "{{ https_port }}",
+    "https.port": {{ https_port }},
     "https.skin": "{{ https_skin }}",
     "https.certificate": "{{ https_certificate }}",
     "https.key": "{{ https_key }}",
@@ -124,7 +124,7 @@
     "snmp.enabled": {{ snmp_enabled }},
     "snmp.port": {{ snmp_port }},
     "ntp.enabled": {{ ntp_enabled }},
-    "ntp.port": "{{ ntp_port }}",
+    "ntp.port": {{ ntp_port }},
     "tftp.enabled": {{ tftp_enabled }},
     "tftp.port": {{ tftp_port }},
     "tcpbanner.maxnum":{{ tcpbanner_maxnum }},
@@ -141,7 +141,7 @@
     "tcpbanner_1.keep_alive_interval":{{ tcpbanner_1_keep_alive_interval }},
     "tcpbanner_1.keep_alive_idle": {{ tcpbanner_1_keep_alive_idle }},
     "telnet.enabled": {{ telnet_enabled }},
-    "telnet.port": "{{ telnet_port }}",
+    "telnet.port": {{ telnet_port }},
     "telnet.banner": "{{ telnet_banner }}",
     "telnet.honeycreds": [
         {
