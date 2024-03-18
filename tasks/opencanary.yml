@@ -84,11 +84,19 @@
       template:
         src: samba_conf.jn2
         dest: /etc/samba/smb.conf
+      notify: Restart samba
 
     - name: Configure Samba Audit
       template:
         src: samba_audit.jn2
         dest: /etc/rsyslog.d/smb_audit.conf
+
+    - name: Touch samba-audit.log
+      file:
+        path: /var/log/samba-audit.log
+        state: touch
+        owner: syslog
+        group: adm
       notify: Restart rsyslogd
   when: smb_enabled == "true"
 

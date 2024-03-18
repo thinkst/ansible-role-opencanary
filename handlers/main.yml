@@ -10,5 +10,10 @@
 
 - name: Restart rsyslogd
   systemd:
-    name: rsyslogd
+    name: rsyslog
+    state: restarted
+
+- name: Restart samba
+  systemd:
+    name: smbd
     state: restarted
