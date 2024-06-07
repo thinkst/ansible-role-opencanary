@@ -27,7 +27,7 @@ https_key: ""
 httpproxy_enabled: "false"
 httpproxy_port: "8080"
 httpproxy_skin: "ms-isa"
-llmnr_enabled: false
+llmnr_enabled: "false"
 llmnr_query_interval: 60
 llmnr_query_splay: 5
 llmnr_hostname: "{{ ansible_hostname }}"
