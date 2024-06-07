@@ -6,7 +6,7 @@
       state: latest
       update_cache: yes
 
-  - name: Install Samaba
+  - name: Install Samba
     ansible.builtin.apt:
       name: samba
       state: latest
@@ -28,7 +28,7 @@
       update_cache: yes
     when: ansible_facts['distribution_major_version'] == "9"
 
-  - name: Install Samaba
+  - name: Install Samba
     ansible.builtin.dnf:
       name: samba
       state: latest
