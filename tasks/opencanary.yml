@@ -37,14 +37,22 @@
     version: "{{ opencanary_version }}"
   when: install_source == "pypi"
 
-- name: Install optional python dependencies
+- name: Install SMNP python dependencies
   ansible.builtin.pip:
     name:
       - scapy
       - pcapy-ng
     virtualenv: "{{ opencanary_install_dir }}"
     virtualenv_command: "/usr/bin/python3 -m venv"
-  when: snmp_enabled == "true" or llmnr_enabled == "true"
+  when: snmp_enabled == "true"
+
+- name: Install LLMNR python dependencies
+  ansible.builtin.pip:
+    name:
+      - scapy
+    virtualenv: "{{ opencanary_install_dir }}"
+    virtualenv_command: "/usr/bin/python3 -m venv"
+  when: llmnr_enabled == "true"
 
 - name: Create /etc/opencanary
   ansible.builtin.file:
