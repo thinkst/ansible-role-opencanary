@@ -44,7 +44,7 @@
       - pcapy-ng
     virtualenv: "{{ opencanary_install_dir }}"
     virtualenv_command: "/usr/bin/python3 -m venv"
-  when: snmp_enabled == "true"
+  when: snmp_enabled == "true" or llmnr_enabled == "true"
 
 - name: Create /etc/opencanary
   ansible.builtin.file:
