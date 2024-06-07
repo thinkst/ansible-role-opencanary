@@ -43,6 +43,11 @@
             "name": "ms-isa"
         }
     ],
+    "llmnr.enabled": {{ llmnr_enabled }},
+    "llmnr.query_interval": {{ llmnr_query_interval }},
+    "llmnr.query_splay": {{ llmnr_query_splay }},
+    "llmnr.hostname": "{{ llmnr_hostname }}",
+    "llmnr.port": {{ llmnr_port }},
     "logger": {
         "class": "PyLogger",
         "kwargs": {

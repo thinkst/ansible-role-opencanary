@@ -1,13 +1,13 @@
 ---
 - block:
   - name: Install dependencies - APT
-    apt:
+    ansible.builtin.apt:
       name: "{{ apt_packages }}"
       state: latest
       update_cache: yes
 
   - name: Install Samba
-    apt:
+    ansible.builtin.apt:
       name: samba
       state: latest
     when: smb_enabled == "true"
@@ -15,21 +15,21 @@
 
 - block:
   - name: Install dependencies - DNF
-    dnf:
+    ansible.builtin.dnf:
       name: "{{ dnf_packages }}"
       state: latest
       update_cache: yes
     when: ansible_facts['distribution_major_version'] == "8"
 
   - name: Install dependencies
-    dnf:
+    ansible.builtin.dnf:
       name: "{{ dnf_9_packages }}"
       state: latest
       update_cache: yes
     when: ansible_facts['distribution_major_version'] == "9"
 
   - name: Install Samba
-    dnf:
+    ansible.builtin.dnf:
       name: samba
       state: latest
     when: smb_enabled == "true"
