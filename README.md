@@ -54,7 +54,7 @@ Role Variables
 | `opencanary_version`              | latest                           | Specifies the version of OpenCanary to install from PyPi.org/GitHub Tag/Branch.
 | `install_source`                  | pypi                             | Specifies where to get the install from PyPi.org or GitHub.
 | `github_src_dir`                  | /opt/opencanary_src              | Directory to clone git repo to and build src.
-| `device_node_id`                  | opencanary-{{ ansible-hostname}} | OpenCanary device node id.
+| `device_node_id`                  | opencanary-{{ ansible-hostname }} | OpenCanary device node id.
 | `ip_ignorelist`                   | N/A                              | Ansible list of IP addresses using CIDR notation.
 | `logtype_ignorelist`              | N/A                              | Space delimited list of log codetypes to ignore.
 | `git_enabled`                     | false                            | Enable git canary.
@@ -75,6 +75,11 @@ Role Variables
 | `httpproxy_enabled`               | false                            | Enable http proxy canary.
 | `httpproxy_port`                  | 8080                             | Port for http proxy canary.
 | `httpproxy_skin`                  | ms-isa                           | Skin to use for http proxy canary. (snort, ms-isa)
+| `llmnr_enabled`                   | false                            | Enable LLMNR listener.
+| `llmnr_query_interval`            | 60                               | How often to broadcast the LLMNR query (in seconds)
+| `llmnr_query_splay`               | 5                                | Splay time to add randomness to the broadcast (in seconds)
+| `llmnr_hostname`                  | {{ ansible_hostname }}           | Canary LLMNR Hostame.
+| `llmnr_port`                      | 5353                             | LLMNR Port.
 | `logger_syslog_address`           | N/A                              | Syslog address/domain name to send logs.
 | `logger_syslog_port`              | 514                              | Port to use for syslog logging.
 | `logger_file_filename`            | /var/log/opencanary.log          | File path/name of local log.
