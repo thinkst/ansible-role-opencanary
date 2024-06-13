@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Restart=always
 Environment=VIRTUAL_ENV={{ opencanary_install_dir }}
-Environment=PATH=$VIRTUAL_ENV/bin:/usr/bin:$PATH
+Environment=PATH=$VIRTUAL_ENV/bin:/usr/bin:/usr/sbin:$PATH
 WorkingDirectory={{ opencanary_install_dir }}/bin
 ExecStart={{ opencanary_install_dir }}/bin/opencanaryd --dev
 
