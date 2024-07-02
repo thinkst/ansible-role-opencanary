@@ -90,7 +90,7 @@
                 }{% endif %}{% if teams_webhook_url is defined %},
                 "teams": {
                     "class": "opencanary.logger.TeamsHandler",
-                    "webhook_url": "{{ teams_webook_url }}"
+                    "webhook_url": "{{ teams_webhook_url }}"
                 }{% endif %}{% if webhook_url is defined %},
                 "webhook": {
                     "class": "opencanary.logger.WebhookHandler",
